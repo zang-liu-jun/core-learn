@@ -1897,8 +1897,7 @@ function baseCreateRenderer(
       // and oldIndex = 0 is a special value indicating the new node has
       // no corresponding old node.
       // used for determining longest stable subsequence
-      // newIndexToOldIndexMap 用来存放新节点索引和老节点索引的数组。
-      // newIndexToOldIndexMap 数组的index是新vnode的索引 ， value是老vnode的索引。
+      // newIndexToOldIndexMap 用来存放新节点索引和老节点索引的数组。index是新vnode的索引 ， value是老vnode的索引。
       const newIndexToOldIndexMap = new Array(toBePatched)
       for (i = 0; i < toBePatched; i++) newIndexToOldIndexMap[i] = 0
 
@@ -1979,6 +1978,7 @@ function baseCreateRenderer(
           // move if:
           // There is no stable subsequence (e.g. a reverse)
           // OR current node is not among the stable sequence
+          // j<0说明没有最长递增子序列，i !== increasingNewIndexSequence[j]说明它不在最长递增子序列中，那么就移动这个节点
           if (j < 0 || i !== increasingNewIndexSequence[j]) {
             move(nextChild, container, anchor, MoveType.REORDER)
           } else {
